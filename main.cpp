@@ -41,7 +41,9 @@ int main() {
         grid.displayGrid();
 
         if (grid.isSolved()) {
-            std::cout << "Puzzle Solved! Press ';' to go to the next round or 'p' to quit.\n";
+            grid.win();
+            std::cout << "\n\nPuzzle Solved! Press ';' to go to the next round or 'p' to quit.\n";
+            std::cout << "Solving time: " << grid.getSolvingTime();
         }
 
         input = getch();

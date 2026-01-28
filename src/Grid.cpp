@@ -22,6 +22,11 @@ void Grid::clearGrid() {
     clearMatrix(grid);
 }
 
+// sets the time of start
+void Grid::setStartTime() {
+    startTime = std::chrono::steady_clock::now();
+}
+
 // resets solution grid
 // then selects 4 random elements in the grid and sets them to ones
 // algorithm only works for 3x3 grids, otherwise you must modify the numbers
@@ -116,6 +121,7 @@ void Grid::nextRound() {
     calculateSolutions();
 
     clearGrid();
+    setStartTime();
 }
 
 // returns true if grid == solution
@@ -130,6 +136,11 @@ bool Grid::isSolved() {
     }
 
     return true;
+}
+
+// gets the amount of time in between the start of solving and now
+std::chrono::milliseconds Grid::getSolvingTime() {
+    return std::chrono::duration_cast<std::chrono::milliseconds>(solveTime - startTime).count();
 }
 
 // processes user input to modify the grid
@@ -157,4 +168,9 @@ bool Grid::processInput(char input) {
     }   
 
     return true;
+}
+
+// sets the solveTime
+void Grid::win() {
+    solveTime = std::chrono::steady_clock::now();
 }
